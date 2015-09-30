@@ -1,6 +1,8 @@
 # MasonryLearn-1
 学下Masonry使用
 
+<http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/>
+
 Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性
 
 ##### 居中显示一个view
@@ -21,7 +23,6 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
     [sv1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(sv).insets(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
-    ![image](http://cl.ly/image/0b0v1m1d0g0f)
 ##### 让一个view略小于其superView（边距为10）
     UIView *sv1 = [UIView new];
     [sv1 showPlaceHolder];
@@ -30,7 +31,7 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
     [sv1 mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(sv).insets(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
-#### 让两个高度为150的View垂直居中且等宽且等间隔排列 间隔为10
+##### 让两个高度为150的View垂直居中且等宽且等间隔排列 间隔为10
     int padding = 10;
     
     UIView *sv2 = [UIView new];
@@ -58,7 +59,7 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
         make.height.mas_equalTo(@150);
         make.width.equalTo(sv2);
     }];
-#### 在UIScrollView顺序排列一些View并且自动计算contentSize
+##### 在UIScrollView顺序排列一些View并且自动计算contentSize
 	UIScrollView *scrollView = [UIScrollView new];
     scrollView.backgroundColor = [UIColor whiteColor];
     [sv addSubview:scrollView];
@@ -107,5 +108,6 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
     [container mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(lastView.mas_bottom);
     }];
-
+	//container这个View起到了一个中间层的作用 能够自动的计算uiscrollView的contentSize
+##### 横向或者纵向等间隙的排列一组View
 

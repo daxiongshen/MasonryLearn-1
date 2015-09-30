@@ -16,6 +16,7 @@
 		F6A6F7791BBB894E006B7B40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A6F7771BBB894E006B7B40 /* LaunchScreen.storyboard */; };
 		F6A6F7841BBB894F006B7B40 /* MasonryLearn_1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A6F7831BBB894F006B7B40 /* MasonryLearn_1Tests.m */; };
 		F6A6F78F1BBB894F006B7B40 /* MasonryLearn_1UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A6F78E1BBB894F006B7B40 /* MasonryLearn_1UITests.m */; };
+		F6A6F7A31BBBDDAF006B7B40 /* UIView+Masonry_LJC.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A6F7A21BBBDDAF006B7B40 /* UIView+Masonry_LJC.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		F6A6F78A1BBB894F006B7B40 /* MasonryLearn-1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MasonryLearn-1UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A6F78E1BBB894F006B7B40 /* MasonryLearn_1UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasonryLearn_1UITests.m; sourceTree = "<group>"; };
 		F6A6F7901BBB894F006B7B40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6A6F7A11BBBDDAF006B7B40 /* UIView+Masonry_LJC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Masonry_LJC.h"; sourceTree = "<group>"; };
+		F6A6F7A21BBBDDAF006B7B40 /* UIView+Masonry_LJC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Masonry_LJC.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +132,8 @@
 				F6A6F76D1BBB894E006B7B40 /* AppDelegate.m */,
 				F6A6F76F1BBB894E006B7B40 /* ViewController.h */,
 				F6A6F7701BBB894E006B7B40 /* ViewController.m */,
+				F6A6F7A11BBBDDAF006B7B40 /* UIView+Masonry_LJC.h */,
+				F6A6F7A21BBBDDAF006B7B40 /* UIView+Masonry_LJC.m */,
 				F6A6F7721BBB894E006B7B40 /* Main.storyboard */,
 				F6A6F7751BBB894E006B7B40 /* Assets.xcassets */,
 				F6A6F7771BBB894E006B7B40 /* LaunchScreen.storyboard */,
@@ -329,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6A6F7A31BBBDDAF006B7B40 /* UIView+Masonry_LJC.m in Sources */,
 				F6A6F7711BBB894E006B7B40 /* ViewController.m in Sources */,
 				F6A6F76E1BBB894E006B7B40 /* AppDelegate.m in Sources */,
 				F6A6F76B1BBB894E006B7B40 /* main.m in Sources */,

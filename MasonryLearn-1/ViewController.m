@@ -78,54 +78,82 @@
 //        make.width.equalTo(sv2);
 //    }];
     
-    UIScrollView *scrollView = [UIScrollView new];
-    scrollView.backgroundColor = [UIColor whiteColor];
-    [sv addSubview:scrollView];
-    [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(sv).insets(UIEdgeInsetsMake(5, 5, 5, 5));
-    }];
     
-    UIView *container = [UIView new];
-    container.backgroundColor = [UIColor yellowColor];
-    [scrollView addSubview:container];
-    [container mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(scrollView);
-        make.width.equalTo(scrollView);
-    }];
+//    4、
+//    UIScrollView *scrollView = [UIScrollView new];
+//    scrollView.backgroundColor = [UIColor whiteColor];
+//    [sv addSubview:scrollView];
+//    [scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(sv).insets(UIEdgeInsetsMake(5, 5, 5, 5));
+//    }];
+//    
+//    UIView *container = [UIView new];
+//    container.backgroundColor = [UIColor yellowColor];
+//    [scrollView addSubview:container];
+//    [container mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(scrollView);
+//        make.width.equalTo(scrollView);
+//    }];
+//    
+//    int count = 10;
+//    
+//    UIView *lastView = nil;
+//    
+//    for (int i = 0; i < count; i++) {
+//        
+//        UIView *subv = [UIView new];
+//        [container addSubview:subv];
+//        
+//        subv.backgroundColor = [UIColor colorWithHue:( arc4random() % 256 / 256.0 )
+//                                          saturation:( arc4random() % 128 / 256.0 ) + 0.5
+//                                          brightness:( arc4random() % 128 / 256.0 ) + 0.5
+//                                               alpha:1];
+//        
+//        [subv mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.equalTo(container);
+//            make.height.mas_equalTo(@(20*i));
+//            
+//            if (lastView) {
+//                make.top.mas_equalTo(lastView.mas_bottom);
+//            } else {
+//                make.top.mas_equalTo(container.mas_top);
+//            }
+//            
+//        }];
+//        
+//        lastView = subv;
+//        
+//    }
+//    
+//    [container mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(lastView.mas_bottom);
+//    }];
     
-    int count = 10;
     
-    UIView *lastView = nil;
     
-    for (int i = 0; i < count; i++) {
-        
-        UIView *subv = [UIView new];
-        [container addSubview:subv];
-        
-        subv.backgroundColor = [UIColor colorWithHue:( arc4random() % 256 / 256.0 )
-                                          saturation:( arc4random() % 128 / 256.0 ) + 0.5
-                                          brightness:( arc4random() % 128 / 256.0 ) + 0.5
-                                               alpha:1];
-        
-        [subv mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(container);
-            make.height.mas_equalTo(@(20*i));
-            
-            if (lastView) {
-                make.top.mas_equalTo(lastView.mas_bottom);
-            } else {
-                make.top.mas_equalTo(container.mas_top);
-            }
-            
-        }];
-        
-        lastView = subv;
-        
-    }
+    UIView *sv11 = [UIView new];
+    UIView *sv12 = [UIView new];
+    UIView *sv13 = [UIView new];
+    UIView *sv21 = [UIView new];
+    UIView *sv31 = [UIView new];
     
-    [container mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(lastView.mas_bottom);
-    }];
+    sv11.backgroundColor = [UIColor redColor];
+    sv12.backgroundColor = [UIColor redColor];
+    sv13.backgroundColor = [UIColor redColor];
+    sv21.backgroundColor = [UIColor redColor];
+    sv31.backgroundColor = [UIColor redColor];
+    
+    [sv addSubview:sv11];
+    [sv addSubview:sv12];
+    [sv addSubview:sv13];
+    [sv addSubview:sv21];
+    [sv addSubview:sv31];
+    
+    
+    
+    
+    
+    
     
 }
 
