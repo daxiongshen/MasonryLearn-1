@@ -10,4 +10,8 @@
 
 @interface UIView (Masonry_LJC)
 
+- (void) distributeSpacingHorizontallyWith:(NSArray*)views;
+
+- (void) distributeSpacingVerticallyWith:(NSArray*)views;
+
 @end

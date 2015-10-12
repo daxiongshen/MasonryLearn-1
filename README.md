@@ -110,4 +110,49 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
     }];
 	//container这个View起到了一个中间层的作用 能够自动的计算uiscrollView的contentSize
 ##### 横向或者纵向等间隙的排列一组View
+	UIView *sv11 = [UIView new];
+    UIView *sv12 = [UIView new];
+    UIView *sv13 = [UIView new];
+    UIView *sv21 = [UIView new];
+    UIView *sv31 = [UIView new];
+    
+    sv11.backgroundColor = [UIColor redColor];
+    sv12.backgroundColor = [UIColor redColor];
+    sv13.backgroundColor = [UIColor redColor];
+    sv21.backgroundColor = [UIColor redColor];
+    sv31.backgroundColor = [UIColor redColor];
+    
+    [sv addSubview:sv11];
+    [sv addSubview:sv12];
+    [sv addSubview:sv13];
+    [sv addSubview:sv21];
+    [sv addSubview:sv31];
+    
+    [sv11 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(@[sv12, sv13]);
+        make.centerX.equalTo(@[sv21, sv31]);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
+    
+    [sv12 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(70, 20));
+    }];
+    
+    [sv13 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    
+    [sv21 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 20));
+    }];
+    
+    [sv31 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(40, 60));
+    }];
+    
+    [sv distributeSpacingHorizontallyWith:@[sv11, sv12, sv13]];
+    [sv distributeSpacingVerticallyWith:@[sv11, sv21, sv31]];
+    
+    [sv showPlaceHolderWithAllSubviews];
+    [sv hidePlaceHolder];
 

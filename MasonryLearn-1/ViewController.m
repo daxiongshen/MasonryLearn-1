@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <Masonry.h>
 #import <MMPlaceHolder.h>
+#import "UIView+Masonry_LJC.h"
 
 @interface ViewController ()
 
@@ -30,7 +31,7 @@
         make.size.mas_equalTo(CGSizeMake(300, 300));
     }];
     
-//    1、
+//    1、居中显示一个view
 //    UIView *sv1 = [UIView new];
 //    [sv1 showPlaceHolder];
 //    sv1.backgroundColor = [UIColor redColor];
@@ -39,7 +40,7 @@
 //        make.edges.equalTo(sv).insets(UIEdgeInsetsMake(10, 10, 10, 10));
 //    }];
     
-//    2、
+//    2、让一个view略小于其superView(边距为10)
 //    UIView *sv1 = [UIView new];
 //    [sv1 showPlaceHolder];
 //    sv1.backgroundColor = [UIColor redColor];
@@ -49,7 +50,7 @@
 //    }];
     
     
-//    3、
+//    3、 让两个高度为150的view垂直居中且等宽且等间隔排列 间隔为10(自动计算其宽度)
 //    int padding = 10;
 //    
 //    UIView *sv2 = [UIView new];
@@ -79,7 +80,7 @@
 //    }];
     
     
-//    4、
+//    4、在UIScrollView顺序排列一些view并自动计算contentSize
 //    UIScrollView *scrollView = [UIScrollView new];
 //    scrollView.backgroundColor = [UIColor whiteColor];
 //    [sv addSubview:scrollView];
@@ -130,7 +131,7 @@
 //    }];
     
     
-    
+//    4横向或者纵向等间隙的排列一组view
     UIView *sv11 = [UIView new];
     UIView *sv12 = [UIView new];
     UIView *sv13 = [UIView new];
@@ -149,11 +150,33 @@
     [sv addSubview:sv21];
     [sv addSubview:sv31];
     
+    [sv11 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(@[sv12, sv13]);
+        make.centerX.equalTo(@[sv21, sv31]);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
     
+    [sv12 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(70, 20));
+    }];
     
+    [sv13 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
     
+    [sv21 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 20));
+    }];
     
+    [sv31 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(40, 60));
+    }];
     
+    [sv distributeSpacingHorizontallyWith:@[sv11, sv12, sv13]];
+    [sv distributeSpacingVerticallyWith:@[sv11, sv21, sv31]];
+    
+    [sv showPlaceHolderWithAllSubviews];
+    [sv hidePlaceHolder];
     
 }
 
