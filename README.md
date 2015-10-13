@@ -3,6 +3,8 @@
 
 <http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/>
 
+<http://www.cnblogs.com/fwx2015/p/4868166.html>
+
 Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性
 
 ##### 居中显示一个view
@@ -157,16 +159,156 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
     [sv hidePlaceHolder];
 
 
+##### Other
 
+	//  make.top.equalTo(superview.top).offset(padding);
+        make.top.equalTo(superview).offset(padding);
 
+	//  make.width.equalTo(greenView.mas_width);
+        make.height.equalTo(@[greenView, blueView]);
 
+	//  make.height.equalTo(@[greenView.mas_height, redView.mas_height]); 
+		make.height.equalTo(@[greenView, redView]);
+		
+		make.width.equalTo(self.topInnerView.mas_height).multipliedBy(3);
+		
+		make.width.and.height.equalTo(self.topView).priorityLow();
+		
+		self.longLabel.preferredMaxLayoutWidth = width;
+		
+		//Array
+		self.buttonViews = @[ raiseButton, lowerButton, centerButton ];
+		- (void)setOffset:(CGFloat)offset {
+    		_offset = offset;
+    		[self setNeedsUpdateConstraints];
+		}
 
+		- (void)updateConstraints {
+   		 	[self.buttonViews updateConstraints:^(MASConstraintMaker *make) {
+        		make.baseline.equalTo(self.mas_centerY).with.offset(self.offset);
+   	 		}];
+    		//according to apple super should be called at end of method
+    		[super updateConstraints];
+		}
 
+##### mas_updateConstraints   mas_remakeConstraints
+	requiresConstraintBasedLayout ：我们应该在自定义View中重写这个方法。如果我们要使用Auto Layout布局当前视图，应该设置为返回YES
+	
+	+ (BOOL)requiresConstraintBasedLayout
+	{
+   		 return YES;
+	}
 
+	// this is Apple's recommended place for adding/updating constraints
+	- (void)updateConstraints {
+    
+    	[self.growingButton mas_updateConstraints:^(MASConstraintMaker *make) {
+       	    make.center.equalTo(self);
+           	make.width.equalTo(@(self.buttonSize.width)).priorityLow();
+        	make.height.equalTo(@(self.buttonSize.height)).priorityLow();
+        	make.width.lessThanOrEqualTo(self);
+        	make.height.lessThanOrEqualTo(self);
+    	}];
+    
+    	//according to apple super should be called at end of method
+    	[super updateConstraints];
+	}
 
+	- (void)didTapGrowButton:(UIButton *)button {
+    	self.buttonSize = CGSizeMake(self.buttonSize.width * 1.3, self.buttonSize.height * 1.3);
+    
+    	// tell constraints they need updating
+    	[self setNeedsUpdateConstraints];
+    	// update constraints now so we can animate the change
+    	[self updateConstraintsIfNeeded];
+    
+    	[UIView animateWithDuration:0.4 animations:^{
+       		 [self layoutIfNeeded];
+    	}];
+	}
+	
+	// this is Apple's recommended place for adding/updating constraints
+	- (void)updateConstraints {
+    
+    	[self.movingButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        	make.width.equalTo(@(100));
+        	make.height.equalTo(@(100));
+        
+        	if (self.topLeft) {
+            	make.left.equalTo(self).with.offset(10);
+            	make.top.equalTo(self).with.offset(10);
+        	} else {
+            	make.bottom.equalTo(self).with.offset(-10);
+            	make.right.equalTo(self).with.offset(-10);
+        	}
+    	}];
+    
+    	//according to apple super should be called at end of method
+    	[super updateConstraints];
+	}
+##### Debugging Helpers
+	//you can attach debug keys to views like so:
+    //    greenView.mas_key = @"greenView";
+    //    redView.mas_key = @"redView";
+    //    blueView.mas_key = @"blueView";
+    //    superview.mas_key = @"superview";
+    
+    //OR you can attach keys automagically like so:
+    MASAttachKeys(greenView, redView, blueView, superview);
+    
+    //you can also attach debug keys to constaints
+    make.edges.equalTo(@1).key(@"ConflictingConstraint"); //composite constraint keys will be indexed
+    make.height.greaterThanOrEqualTo(@5000).key(@"ConstantConstraint");
 
+##### Attribute Chaining
+	UIEdgeInsets padding = UIEdgeInsetsMake(15, 10, 15, 10);
+	// chain attributes
+    make.top.and.left.equalTo(superview).insets(padding);
+	
+##### 2个或2个以上控件等间隔排序
+	[arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:20 leadSpacing:5 tailSpacing:5];
+    [arr makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.width.equalTo(@60);
+    }];
+    
+    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:30 leadSpacing:200 tailSpacing:30];
+    [arr makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@60);
+        make.height.equalTo(@60);
+    }];
+	
+	/**
+ 	*  多个控件固定间隔的等间隔排列，变化的是控件的长度或者宽度值
+ 	*
+ 	*  @param axisType        轴线方向
+ 	*  @param fixedSpacing    间隔大小
+ 	*  @param leadSpacing     头部间隔
+ 	*  @param tailSpacing     尾部间隔
+ 	*/
+	- (void)mas_distributeViewsAlongAxis:(MASAxisType)axisType 
+                    withFixedSpacing:(CGFloat)fixedSpacing l
+                          eadSpacing:(CGFloat)leadSpacing 
+                         tailSpacing:(CGFloat)tailSpacing;
 
-
-
-
-
+	/**
+	 *  多个固定大小的控件的等间隔排列,变化的是间隔的空隙
+	 *
+	 *  @param axisType        轴线方向
+	 *  @param fixedItemLength 每个控件的固定长度或者宽度值
+	 *  @param leadSpacing     头部间隔
+	 *  @param tailSpacing     尾部间隔
+	 */
+	- (void)mas_distributeViewsAlongAxis:(MASAxisType)axisType 
+                 withFixedItemLength:(CGFloat)fixedItemLength 
+                         leadSpacing:(CGFloat)leadSpacing 
+                         tailSpacing:(CGFloat)tailSpacing;
+                         
+                         
+                         
+	setNeedsLayout：告知页面需要更新，但是不会立刻开始更新。执行后会立刻调用layoutSubviews。
+	layoutIfNeeded：告知页面布局立刻更新。所以一般都会和setNeedsLayout一起使用。如果希望立刻生成新的frame需要调用	此方法，利用这点一般布局动画可以在更新布局后直接使用这个方法让动画生效。
+	layoutSubviews：系统重写布局
+	setNeedsUpdateConstraints：告知需要更新约束，但是不会立刻开始
+	updateConstraintsIfNeeded：告知立刻更新约束
+	updateConstraints：系统更新约束
