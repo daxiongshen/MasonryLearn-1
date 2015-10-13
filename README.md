@@ -312,3 +312,31 @@ Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更�
 	setNeedsUpdateConstraints：告知需要更新约束，但是不会立刻开始
 	updateConstraintsIfNeeded：告知立刻更新约束
 	updateConstraints：系统更新约束
+	
+##### Composition
+	edges
+	// make top, left, bottom, right equal view2
+	make.edges.equalTo(view2);
+
+	// make top = superview.top + 5, left = superview.left + 10,
+	//      bottom = superview.bottom - 15, right = superview.right - 20
+	make.edges.equalTo(superview).insets(UIEdgeInsetsMake(5, 10, 15, 20))
+	
+	size
+	// make width and height greater than or equal to titleLabel
+	make.size.greaterThanOrEqualTo(titleLabel)
+
+	// make width = superview.width + 100, height = superview.height - 50
+	make.size.equalTo(superview).sizeOffset(CGSizeMake(100, -50))
+	
+	center
+	// make centerX and centerY = button1
+	make.center.equalTo(button1)
+
+	// make centerX = superview.centerX - 5, centerY = superview.centerY + 10
+	make.center.equalTo(superview).centerOffset(CGPointMake(-5, 10))
+	You can chain view attributes for increased readability:
+
+	// All edges but the top should equal those of the superview
+	make.left.right.and.bottom.equalTo(superview);
+	make.top.equalTo(otherView);
